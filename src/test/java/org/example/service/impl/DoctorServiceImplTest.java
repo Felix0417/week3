@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.print.Doc;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -55,7 +54,7 @@ class DoctorServiceImplTest {
     }
 
     @Test
-    void findById_return_null(){
+    void findById_return_null() {
         when(repository.findByIdWithPatients(anyInt())).thenAnswer(invocationOnMock -> Optional.empty());
 
         assertNull(service.findById(1));
@@ -72,7 +71,7 @@ class DoctorServiceImplTest {
     }
 
     @Test
-    void save_bad(){
+    void save_bad() {
         Doctor doctor = new Doctor("Smith", 50000, new Hospital());
         doctor.setPatients(new HashSet<>());
 
@@ -93,14 +92,14 @@ class DoctorServiceImplTest {
     }
 
     @Test
-    void update_wrong_id(){
+    void update_wrong_id() {
         when(repository.findById(1)).thenReturn(Optional.empty());
 
         assertNull(service.update(1, any()));
     }
 
     @Test
-    void update_bad_safe(){
+    void update_bad_safe() {
         Doctor doctor = new Doctor(0, "S", 5, new Hospital());
 
         when(repository.findByIdWithPatients(1)).thenReturn(Optional.of(doctor));
@@ -121,7 +120,7 @@ class DoctorServiceImplTest {
     }
 
     @Test
-    void delete_bad(){
+    void delete_bad() {
         Doctor doctor = new Doctor(1, "S", 5, new Hospital());
         doctor.setPatients(new HashSet<>());
 

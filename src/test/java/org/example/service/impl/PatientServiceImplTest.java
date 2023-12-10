@@ -117,8 +117,8 @@ class PatientServiceImplTest {
     }
 
     @Test
-    void delete_bad(){
-        Patient patient = new Patient(1,"Name 1", 10, "address 1");
+    void delete_bad() {
+        Patient patient = new Patient(1, "Name 1", 10, "address 1");
         patient.setDoctors(new HashSet<>());
 
         when(repository.findByIdWithDoctors(1)).thenAnswer(invocationOnMock -> Optional.of(patient));

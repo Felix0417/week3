@@ -2,14 +2,12 @@ package org.example.service.impl;
 
 import org.example.jpa.DoctorRepository;
 import org.example.jpa.HospitalRepository;
-import org.example.model.Doctor;
 import org.example.model.Hospital;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.testcontainers.shaded.org.checkerframework.checker.units.qual.Mass;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -58,7 +56,7 @@ class HospitalServiceImplTest {
     }
 
     @Test
-    void findById_bad(){
+    void findById_bad() {
         when(service.findById(2)).thenAnswer(invocation -> Optional.empty());
 
         assertNull(service.findById(2));
@@ -75,7 +73,7 @@ class HospitalServiceImplTest {
     }
 
     @Test
-    void save_bad(){
+    void save_bad() {
         Hospital hospital = new Hospital(0, "Hospital 1", "address 1", LocalDateTime.now());
 
         when(repository.save(hospital)).thenReturn(hospital);
@@ -85,7 +83,7 @@ class HospitalServiceImplTest {
 
     @Test
     void update() {
-        Hospital hospital =  new Hospital("Hospital 1", "address 1");
+        Hospital hospital = new Hospital("Hospital 1", "address 1");
         Hospital updatedHospital = new Hospital(1, "H", "a", LocalDateTime.now());
 
         when(repository.findById(1)).thenReturn(Optional.of(hospital));
@@ -96,14 +94,14 @@ class HospitalServiceImplTest {
     }
 
     @Test
-    void update_wrong_id(){
+    void update_wrong_id() {
         when(repository.findById(1)).thenReturn(Optional.empty());
 
         assertNull(service.update(1, any()));
     }
 
     @Test
-    void update_bad(){
+    void update_bad() {
         Hospital hospital = new Hospital(0, "H", "a", LocalDateTime.now());
 
         when(repository.findById(1)).thenReturn(Optional.of(hospital));
@@ -120,7 +118,7 @@ class HospitalServiceImplTest {
     }
 
     @Test
-    void delete_bad(){
+    void delete_bad() {
         when(repository.existsById(1)).thenReturn(false);
 
         assertFalse(service.delete(1));
