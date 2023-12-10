@@ -9,7 +9,7 @@ import org.example.web.dto.hospital.HospitalOutputDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-11T00:21:28+0300",
+    date = "2023-12-11T01:08:30+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 11.0.21 (Ubuntu)"
 )
 public class HospitalMapperImpl implements HospitalMapper {

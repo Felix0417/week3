@@ -50,6 +50,7 @@ public class DoctorServiceImpl implements DoctorService {
             logger.debug("Save new Doctor with parameters - {}", newDoctor);
         } else {
             logger.debug("Doctor was not saved with this parameters - {}", doctor);
+            return null;
         }
         return newDoctor;
     }
@@ -71,6 +72,7 @@ public class DoctorServiceImpl implements DoctorService {
             logger.debug("Doctor with id - {} was updated", pos);
         } else {
             logger.debug("Doctor with id - {} was not updated", pos);
+            return null;
         }
         return updatedDoctor;
     }

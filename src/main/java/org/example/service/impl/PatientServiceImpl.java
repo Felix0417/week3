@@ -48,6 +48,7 @@ public class PatientServiceImpl implements PatientService {
             logger.debug("Save new Patient with parameters - {}", newPatient);
         } else {
             logger.debug("Patient with parameters - {} was not saved", patient);
+            return null;
         }
         return newPatient;
     }
@@ -68,6 +69,7 @@ public class PatientServiceImpl implements PatientService {
             logger.debug("Hospital with this id - {} was updated", pos);
         } else {
             logger.debug("Hospital with this id - {} was not updated", pos);
+            return null;
         }
         return updatePatient;
     }

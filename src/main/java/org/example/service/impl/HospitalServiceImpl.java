@@ -51,10 +51,11 @@ public class HospitalServiceImpl implements HospitalService {
     @Transactional
     public Hospital save(Hospital hospital) {
         Hospital newHospital = repository.save(hospital);
-        if (hospital.getId() != 0) {
+        if (newHospital.getId() != 0) {
             logger.debug("Save new Hospital with parameters - {}", newHospital);
         } else {
             logger.debug("Hospital with parameters - {} was not saved", newHospital);
+            return null;
         }
         return newHospital;
     }
@@ -62,16 +63,19 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     @Transactional
     public Hospital update(int pos, Hospital hospital) {
-        if (findById(pos) == null) {
+        Hospital current = findById(pos);
+        if (current == null) {
             logger.debug("Hospital with this id - {} was not found", pos);
             return null;
         }
-        hospital.setId(pos);
-        Hospital updateHospital = repository.save(hospital);
+        current.setName(hospital.getName());
+        current.setAddress(hospital.getAddress());
+        Hospital updateHospital = repository.save(current);
         if (updateHospital.getId() != 0) {
             logger.debug("Hospital with this id - {} was updated", pos);
         } else {
             logger.debug("Hospital with this id - {} was not updated", pos);
+            return null;
         }
         return updateHospital;
     }
