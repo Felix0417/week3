@@ -25,7 +25,7 @@ class DoctorMapperTest {
 
     @BeforeEach
     void setUp() {
-        mapper = new DoctorMapperImpl();
+        mapper = DoctorMapper.INSTANCE;
 
         inputDto = new DoctorInputDto("Petrov", 200, 1);
         hospital = new Hospital(1, "Hospital", "Address", LocalDateTime.now());

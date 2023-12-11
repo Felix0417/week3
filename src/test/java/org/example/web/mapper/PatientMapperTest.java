@@ -16,12 +16,14 @@ class PatientMapperTest {
     PatientMapper mapper;
 
     PatientInputDto inputDto;
+
     Patient patient;
+
     PatientOutputDto outputDto;
 
     @BeforeEach
     void setUp() {
-        mapper = new PatientMapperImpl();
+        mapper = PatientMapper.INSTANCE;
 
         inputDto = new PatientInputDto("Name", 10, "Address");
         patient = new Patient(1, "Name", 10, "Address");

@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/patients", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PatientController {
+
     private final PatientService service;
 
     public PatientController(PatientService service) {
@@ -37,7 +38,7 @@ public class PatientController {
     @PostMapping
     public ResponseEntity<PatientOutputDto> save(@RequestBody PatientInputDto patientInputDto) {
         Patient patient = service.save(PatientMapper.INSTANCE.mapToObj(patientInputDto));
-        return convert(patient,HttpStatus.CREATED);
+        return convert(patient, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

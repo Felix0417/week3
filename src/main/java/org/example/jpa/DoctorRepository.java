@@ -23,5 +23,5 @@ public interface DoctorRepository extends CrudRepository<Doctor, Integer> {
     Optional<Doctor> findByIdWithPatients(@Param("id") int id);
 
     @Query("SELECT DISTINCT d FROM Doctor d WHERE d.hospital.id=:id")
-    Set<Doctor> findAllByHospital(@Param("id") int id);
+    Set<Doctor> findAllByHospitalId(@Param("id") int id);
 }

@@ -14,12 +14,17 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>5.3.19</spring.version>
+        <spring.data>2.4.7</spring.data>
+        <spring.web>5.3.19</spring.web>
+        <javax.servlet>4.0.1</javax.servlet>
         <hibernate.version>5.6.0.Final</hibernate.version>
+        <hibernate-validator>6.1.6.Final</hibernate-validator>
         <postgresql>42.6.0</postgresql>
+        <mapstruct>1.5.5.Final</mapstruct>
         <log4j-api>2.12.4</log4j-api>
         <jackson>2.14.2</jackson>
         <junit.version>5.9.2</junit.version>
-        <mockito-core>5.5.0</mockito-core>
+        <mockito-core>3.12.4</mockito-core>
         <powermock>2.0.9</powermock>
         <testcontainers>1.19.2</testcontainers>
         <jacoco-maven-plugin>0.8.10</jacoco-maven-plugin>
@@ -32,6 +37,7 @@
             <version>${spring.version}</version>
         </dependency>
 
+<!--        DB, ORM-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -40,16 +46,13 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.1.6.Final</version>
+            <version>${hibernate-validator}</version>
         </dependency>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql}</version>
         </dependency>
-
-<!--        ORM-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -58,7 +61,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>2.4.7</version>
+            <version>${spring.data}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -107,10 +110,6 @@
                     <groupId>com.fasterxml</groupId>
                     <artifactId>classmate</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>net.bytebuddy</groupId>
-                    <artifactId>byte-buddy</artifactId>
-                </exclusion>
             </exclusions>
         </dependency>
 
@@ -118,12 +117,12 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.5.5.Final</version>
+            <version>${mapstruct}</version>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
-            <version>1.5.5.Final</version>
+            <version>${mapstruct}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -148,17 +147,17 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.3.19</version>
+            <version>${spring.web}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>5.3.19</version>
+            <version>${spring.web}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <version>${javax.servlet}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -278,6 +277,25 @@
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

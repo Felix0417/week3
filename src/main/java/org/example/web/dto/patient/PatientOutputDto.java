@@ -9,6 +9,7 @@ import java.util.Set;
 public class PatientOutputDto {
 
     private final long id;
+
     private final String name;
 
     private final int age;

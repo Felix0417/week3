@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 class HospitalServiceImplTest {
@@ -112,14 +113,14 @@ class HospitalServiceImplTest {
 
     @Test
     void delete() {
-        when(repository.existsById(1)).thenReturn(true);
+        when(repository.existsById(anyInt())).thenReturn(false);
 
         assertTrue(service.delete(1));
     }
 
     @Test
     void delete_bad() {
-        when(repository.existsById(1)).thenReturn(false);
+        when(repository.existsById(1)).thenReturn(true);
 
         assertFalse(service.delete(1));
     }

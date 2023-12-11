@@ -83,15 +83,15 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     @Transactional
     public boolean delete(int id) {
-        Set<Doctor> doctors = doctorRepository.findAllByHospital(id);
+        Set<Doctor> doctors = doctorRepository.findAllByHospitalId(id);
         removeRelations(doctors);
         repository.deleteById(id);
         if (repository.existsById(id)) {
-            logger.debug("Hospital with this id - {} was competently deleted ", id);
-            return true;
-        } else {
             logger.debug("Hospital with this id - {} was not deleted", id);
             return false;
+        } else {
+            logger.debug("Hospital with this id - {} was competently deleted ", id);
+            return true;
         }
     }
 

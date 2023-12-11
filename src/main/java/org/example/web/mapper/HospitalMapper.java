@@ -12,6 +12,7 @@ import java.util.List;
 
 @Mapper
 public interface HospitalMapper extends EntityMapper<Hospital, HospitalInputDto, HospitalOutputDto> {
+
     HospitalMapper INSTANCE = Mappers.getMapper(HospitalMapper.class);
 
     @Override

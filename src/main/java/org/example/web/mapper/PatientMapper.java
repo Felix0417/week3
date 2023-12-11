@@ -11,6 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface PatientMapper extends EntityMapper<Patient, PatientInputDto, PatientOutputDto> {
+
     PatientMapper INSTANCE = Mappers.getMapper(PatientMapper.class);
 
     @Mapping(source = "id", target = "id")

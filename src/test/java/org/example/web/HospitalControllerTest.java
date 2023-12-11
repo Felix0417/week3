@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 class HospitalControllerTest {
+
     @Mock
     HospitalService service;
 

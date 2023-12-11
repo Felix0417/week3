@@ -17,13 +17,14 @@ class HospitalMapperTest {
     HospitalMapper mapper;
 
     HospitalInputDto inputDto;
-    Hospital hospital;
-    HospitalOutputDto outputDto;
 
+    Hospital hospital;
+
+    HospitalOutputDto outputDto;
 
     @BeforeEach
     void setUp() {
-        mapper = new HospitalMapperImpl();
+        mapper = HospitalMapper.INSTANCE;
 
         inputDto = new HospitalInputDto("Name", "Address");
         hospital = new Hospital(1, "Name", "Address", LocalDateTime.now());
