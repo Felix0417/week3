@@ -31,39 +31,35 @@ public class PatientController {
     @GetMapping("/{id}")
     public ResponseEntity<PatientOutputDto> getById(@PathVariable int id) {
         Patient patient = service.findById(id);
-        return convert(patient);
+        return convert(patient, HttpStatus.OK);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<PatientOutputDto> save(@RequestBody PatientInputDto patientInputDto) {
         Patient patient = service.save(PatientMapper.INSTANCE.mapToObj(patientInputDto));
-        return convert(patient);
+        return convert(patient,HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<PatientOutputDto> update(@PathVariable int id, @RequestBody PatientInputDto patientInputDto) {
         Patient patient = service.update(id, PatientMapper.INSTANCE.mapToObj(patientInputDto));
-        return convert(patient);
+        return convert(patient, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<PatientOutputDto> delete(@PathVariable int id) {
         if (service.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        service.delete(id);
-        return ResponseEntity.ok().build();
+        return service.delete(id) ? ResponseEntity.noContent().build() : ResponseEntity.badRequest().build();
     }
 
-    private ResponseEntity<PatientOutputDto> convert(Patient patient) {
+    private ResponseEntity<PatientOutputDto> convert(Patient patient, HttpStatus status) {
         if (patient == null) {
             return ResponseEntity.notFound().build();
         } else if (patient.getDoctors() != null) {
             patient.getDoctors().forEach(d -> d.setPatients(null));
         }
-        return ResponseEntity.ok(PatientMapper.INSTANCE.mapFromObj(patient));
+        return ResponseEntity.status(status).body(PatientMapper.INSTANCE.mapFromObj(patient));
     }
 }

@@ -19,7 +19,7 @@ public interface DoctorRepository extends CrudRepository<Doctor, Integer> {
     @Query("SELECT DISTINCT d FROM Doctor d")
     List<Doctor> findAllWithPatients();
 
-    @Query("SELECT d FROM Doctor d JOIN FETCH d.hospital JOIN FETCH d.patients p WHERE d.id=:id")
+    @Query("SELECT DISTINCT d FROM Doctor d JOIN FETCH d.hospital LEFT JOIN FETCH d.patients p WHERE d.id=:id")
     Optional<Doctor> findByIdWithPatients(@Param("id") int id);
 
     @Query("SELECT DISTINCT d FROM Doctor d WHERE d.hospital.id=:id")

@@ -15,7 +15,7 @@ import org.example.web.dto.patient.PatientOutputDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-11T01:08:30+0300",
+    date = "2023-12-11T23:30:14+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 11.0.21 (Ubuntu)"
 )
 public class PatientMapperImpl implements PatientMapper {
@@ -70,19 +70,6 @@ public class PatientMapperImpl implements PatientMapper {
         return patient;
     }
 
-    protected Set<PatientOutputDto> patientSetToPatientOutputDtoSet(Set<Patient> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<PatientOutputDto> set1 = new LinkedHashSet<PatientOutputDto>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( Patient patient : set ) {
-            set1.add( mapFromObj( patient ) );
-        }
-
-        return set1;
-    }
-
     protected HospitalOutputDto hospitalToHospitalOutputDto(Hospital hospital) {
         if ( hospital == null ) {
             return null;
@@ -101,18 +88,31 @@ public class PatientMapperImpl implements PatientMapper {
         return hospitalOutputDto;
     }
 
+    protected Set<PatientOutputDto> patientSetToPatientOutputDtoSet(Set<Patient> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<PatientOutputDto> set1 = new LinkedHashSet<PatientOutputDto>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( Patient patient : set ) {
+            set1.add( mapFromObj( patient ) );
+        }
+
+        return set1;
+    }
+
     protected DoctorOutputDto doctorToDoctorOutputDto(Doctor doctor) {
         if ( doctor == null ) {
             return null;
         }
 
+        HospitalOutputDto hospital = null;
         int id = 0;
         String name = null;
-        HospitalOutputDto hospital = null;
 
+        hospital = hospitalToHospitalOutputDto( doctor.getHospital() );
         id = doctor.getId();
         name = doctor.getName();
-        hospital = hospitalToHospitalOutputDto( doctor.getHospital() );
 
         DoctorOutputDto doctorOutputDto = new DoctorOutputDto( id, name, hospital );
 

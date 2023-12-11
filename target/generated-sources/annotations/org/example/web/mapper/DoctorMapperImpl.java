@@ -15,7 +15,7 @@ import org.example.web.dto.patient.PatientOutputDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-11T01:08:30+0300",
+    date = "2023-12-11T23:30:14+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 11.0.21 (Ubuntu)"
 )
 public class DoctorMapperImpl implements DoctorMapper {

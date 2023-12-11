@@ -3,6 +3,7 @@ package org.example.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -84,6 +85,22 @@ public class Doctor {
 
     public void setPatients(Set<Patient> patients) {
         this.patients = patients;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Doctor doctor = (Doctor) o;
+        return id == doctor.id &&
+                Objects.equals(name, doctor.name) &&
+                Objects.equals(salary, doctor.salary) &&
+                Objects.equals(hospital, doctor.hospital);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, salary, hospital);
     }
 
     @Override

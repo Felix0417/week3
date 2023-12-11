@@ -37,42 +37,38 @@ public class DoctorController {
     @GetMapping("/{id}")
     public ResponseEntity<DoctorOutputDto> getById(@PathVariable int id) {
         Doctor doctor = service.findById(id);
-        return convert(doctor);
+        return convert(doctor, HttpStatus.OK);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<DoctorOutputDto> save(@RequestBody DoctorInputDto doctorInputDto) {
         Doctor doctor = service.save(DoctorMapper.INSTANCE.mapToObj(doctorInputDto));
-        return convert(doctor);
+        return convert(doctor, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<DoctorOutputDto> update(@PathVariable int id, @RequestBody DoctorInputDto doctorInputDto) {
         Hospital hospital = hospitalService.findById(doctorInputDto.getHospitalId());
         Doctor doctor = DoctorMapper.INSTANCE.mapToObj(doctorInputDto);
         doctor.setHospital(hospital);
         Doctor updatedDoctor = service.update(id, doctor);
-        return convert(updatedDoctor);
+        return convert(updatedDoctor, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<DoctorOutputDto> delete(@PathVariable int id) {
         if (service.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        service.delete(id);
-        return ResponseEntity.ok().build();
+        return service.delete(id) ? ResponseEntity.noContent().build() : ResponseEntity.badRequest().build();
     }
 
-    private ResponseEntity<DoctorOutputDto> convert(Doctor doctor) {
+    private ResponseEntity<DoctorOutputDto> convert(Doctor doctor, HttpStatus status) {
         if (doctor == null) {
             return ResponseEntity.notFound().build();
         } else if (doctor.getPatients() != null) {
             doctor.getPatients().forEach(p -> p.setDoctors(null));
         }
-        return ResponseEntity.ok(DoctorMapper.INSTANCE.mapFromObj(doctor));
+        return ResponseEntity.status(status).body(DoctorMapper.INSTANCE.mapFromObj(doctor));
     }
 }

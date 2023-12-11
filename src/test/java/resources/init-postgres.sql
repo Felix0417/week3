@@ -30,30 +30,28 @@ CREATE TABLE IF NOT EXISTS doctor_patient
     primary key (doctors_id, patients_id)
 );
 
-
-
 INSERT INTO hospitals (name, address, estimated)
 VALUES ('Hertzen', 'address 3', '2023-11-14 20:46:41.113103'),
        ('Blokhin', 'address 2', '2023-11-15 03:42:21.961245'),
        ('Sechenov', 'address 1', '2023-11-14 20:46:41.113103');
 
-INSERT INTO doctors (id, name, salary, hospital_id)
-VALUES (1, 'Ivanov', 100, 1),
-       (2, 'Petrov', 120, 2),
-       (3, 'Pirogov', 90, 1),
-       (4, 'Hirurgov', 90, 2),
-       (5, 'Svetlov', 100, 3),
-       (6, 'Terapevtov', 90, 1),
-       (7, 'Terapevtova', 90, 1);
+INSERT INTO doctors (name, salary, hospital_id)
+VALUES ('Ivanov', 100, 1),
+       ('Petrov', 120, 2),
+       ('Pirogov', 90, 1),
+       ('Hirurgov', 90, 2),
+       ('Svetlov', 100, 3),
+       ('Terapevtov', 90, 1),
+       ('Terapevtova', 90, 1);
 
-INSERT INTO patients (id, name, age, address)
-VALUES (1, 'Vasya', 30, 'address-1-1'),
-       (2, 'Natasha', 35, 'address-1-4'),
-       (3, 'Nikita', 45, 'address-1-5'),
-       (4, 'Yulia', 23, 'address-1-6'),
-       (5, 'Misha', 30, 'address-1-7'),
-       (6, 'Kolya', 19, 'address-1-8'),
-       (7, 'Felix', 30, 'address101');
+INSERT INTO patients (name, age, address)
+VALUES ('Vasya', 30, 'address-1-1'),
+       ('Natasha', 35, 'address-1-4'),
+       ('Nikita', 45, 'address-1-5'),
+       ('Yulia', 23, 'address-1-6'),
+       ('Misha', 30, 'address-1-7'),
+       ('Kolya', 19, 'address-1-8'),
+       ('Felix', 30, 'address101');
 
 
 INSERT INTO public.doctor_patient (doctors_id, patients_id)

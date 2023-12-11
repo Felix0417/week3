@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "hospitals")
@@ -66,6 +67,19 @@ public class Hospital {
 
     public void setEstimated(LocalDateTime estimated) {
         this.estimated = estimated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Hospital)) return false;
+        Hospital hospital = (Hospital) o;
+        return id == hospital.id && Objects.equals(name, hospital.name) && Objects.equals(address, hospital.address) && Objects.equals(estimated, hospital.estimated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, address, estimated);
     }
 
     @Override
